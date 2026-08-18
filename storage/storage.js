@@ -1,9 +1,6 @@
 const GIF = [
     "chilleraiutopiaminecraft.gif",
-    "rootin tootin.gif",
-    "baby.gif"
-];
-
-const IMG = [
-    "years ago i was chinese.jpg"
+    "rootin_tootin.gif",
+    "baby.gif",
+    "years_ago_i_was_chinese.jpg"
 ];
