@@ -1,5 +1,7 @@
 const DIR_GIFS = "storage/gif"
-const DIR_STORAGE = "storage/storage.json"
+const DIR_STORAGE = "storage/storage.js"
+const STORAGE_PREFIX = "const DATA = `"
+const STORAGE_SUFFIX = "`"
 
 const express = require('express')
 const fs = require("fs")
@@ -14,7 +16,7 @@ app.use(express.static("storage/gif"))
 
 app.get('/', (req, res) => {
     let gif_files = fs.readdirSync(DIR_GIFS)
-    let current_storage = fs.readFileSync(DIR_STORAGE).toString()
+    let current_storage = fs.readFileSync(DIR_STORAGE).toString().slice(STORAGE_PREFIX.length, -STORAGE_SUFFIX.length)
     if (current_storage == "" || !JSON.parse(current_storage))
         current_storage = []
     else
@@ -69,7 +71,6 @@ app.post("/save_storage", (req, res) => {
         ]
     */
 
-    let result = ""
     let files = []
     Object.keys(data).forEach(filename => {
         values = data[filename]
@@ -91,7 +92,7 @@ app.post("/save_storage", (req, res) => {
     })
 
     files_json = JSON.stringify(files)
-    fs.writeFileSync(DIR_STORAGE, files_json)
+    fs.writeFileSync(DIR_STORAGE, STORAGE_PREFIX + files_json + STORAGE_SUFFIX)
 
     // res.send("zapisano (mam nadzieje)")
     res.redirect("\\")

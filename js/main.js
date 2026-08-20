@@ -23,9 +23,10 @@ async function search_gifs(query = "", nsfw = false) {
     query = query.trim().toLocaleLowerCase()
     gif_container.innerHTML = ""
 
-    let GIF = await fetch_gifs()
+    // let GIF = await fetch_gifs()
+    let data = JSON.parse(DATA)
 
-    GIF.forEach((gif) => {
+    data.forEach((gif) => {
         if (gif.nsfw == true && nsfw == false)
             return
 
