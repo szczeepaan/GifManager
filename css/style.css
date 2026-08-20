@@ -20,12 +20,15 @@
     --clr-input: #2a2a2a;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace;
 }
 
-html, body {
+html,
+body {
     min-height: 100%;
     width: 100%;
     padding: 0;
@@ -113,19 +116,25 @@ html, body {
     width: 44px;
     height: 24px;
 }
+
 .toggle-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
+
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--clr-input);
     transition: .3s;
     border-radius: 24px;
 }
+
 .slider:before {
     position: absolute;
     content: "";
@@ -137,13 +146,16 @@ html, body {
     transition: .3s;
     border-radius: 50%;
 }
-input:checked + .slider {
+
+input:checked+.slider {
     background-color: #ff4757;
 }
-input:checked + .slider:before {
+
+input:checked+.slider:before {
     transform: translateX(20px);
     background-color: #fff;
 }
+
 .nsfw-label {
     font-weight: 600;
     color: var(--clr-text);
@@ -161,7 +173,8 @@ input:checked + .slider:before {
     transition: background-color 0.2s ease;
 }
 
-#theme-button:hover, #theme-button:focus {
+#theme-button:hover,
+#theme-button:focus {
     background-color: var(--clr-focus);
 }
 
@@ -185,10 +198,11 @@ input:checked + .slider:before {
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.gif:hover, .gif:focus {
+.gif:hover,
+.gif:focus {
     transform: scale(0.97);
     box-shadow: var(--shadow);
 }
@@ -199,9 +213,11 @@ input:checked + .slider:before {
         gap: 12px;
         padding: 12px;
     }
+
     .gif {
         height: 160px;
     }
+
     #top-bar {
         padding: 15px;
     }
