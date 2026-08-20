@@ -1,0 +1,150 @@
+<style>
+
+#table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+main .row:nth-child(even) {
+    background-color: rgb(180, 180, 180);
+}
+main .row:nth-child(odd) {
+    background-color: rgb(236, 236, 236);
+}
+
+header {
+    font-weight: bold;
+    font-size: 1.25rem;
+    height: 50px;
+    background-color: rgb(128, 128, 128);
+}
+
+.cell {
+    padding: 0 10px;
+}
+
+.preview {
+    width: 8%;
+    overflow: hidden;
+    padding: 0;
+}
+.filename {
+    display: block;
+    width: 12%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: help;
+}
+.tags { width: 60%; }
+.category { width: 12%; }
+.nsfw {
+    display: flex;
+    width: 8%;
+    justify-content: center;
+}
+
+img {
+    height: 50px;
+}
+
+input[type="text"], input[type="checkbox"]  {
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    scale: 1.25;
+}
+
+.hidden {
+    display: none;
+}
+
+.big-img {
+    position: fixed;
+    height: 50vmin;
+    z-index: 9999999999999;
+    left: 0;
+    /* bottom: 20px; */
+}
+
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gif Storage Manager</title>
+</head>
+<body>
+    <h1>Gif Manager Storage Manager</h1>
+    
+    <form action="/save_storage" method="post">
+        <input type="submit" value="Save changes / add all to storage">
+
+        <h2 {{hide}}>Not added to storage</h2>
+
+        <div id="table" {{hide}}>
+            <header class="row">
+                <div class="cell preview">Preview</div>
+                <div class="cell filename">Filename</div>
+                <div class="cell tags">Tags</div>
+                <div class="cell category">Category</div>
+                <div class="cell nsfw">Mark NSFW</div>
+            </header>
+            <main>
+                {{not_in_storage}}
+            </main>
+        </div>
+
+        <h2>In storage</h2>
+        <div id="table">
+            <header class="row">
+                <div class="cell preview">Preview</div>
+                <div class="cell filename">Filename</div>
+                <div class="cell tags">Tags</div>
+                <div class="cell category">Category</div>
+                <div class="cell nsfw">Mark NSFW</div>
+            </header>
+            <main>
+                {{in_storage}}
+            </main>
+        </div>
+
+    </form>
+</body>
+</html>
+
+
+<script>
+
+const imgs = document.querySelectorAll("img")
+
+imgs.forEach((img) => {
+    let big = document.createElement("img")
+    big.src = img.src
+    big.classList.add("big-img")
+
+    img.addEventListener("mouseenter", () => {
+        document.body.appendChild(big)
+    })
+    img.addEventListener("mousemove", (e) => {
+        big.style.left = `${e.clientX + 20}px`
+        big.style.top = `${e.clientY}px`
+    })
+    img.addEventListener("mouseleave", () => {
+        big.remove()
+    })
+})
+
+</script>
